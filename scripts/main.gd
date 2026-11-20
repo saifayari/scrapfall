@@ -342,10 +342,11 @@ func _build_ui() -> void:
     craft_panel.visible = false
     menu_layer = _make_overlay(ui)
     hud_labels["menu_title"] = _make_label(menu_layer, "SCRAPFALL", Vector2(480, 140), 56)
-    _make_button(menu_layer, "PLAY", Vector2(520, 280), _start_game)
-    hud_labels["lang_btn"] = _make_button(menu_layer, "LANGUE", Vector2(520, 360), _cycle_language)
-    hud_labels["credits_btn"] = _make_button(menu_layer, "CREDITS", Vector2(520, 440), _toggle_credits)
-    _make_button(menu_layer, "QUIT", Vector2(520, 520), func(): get_tree().quit())
+    _make_button(menu_layer, "PLAY", Vector2(520, 220), _start_game)
+    _make_button(menu_layer, "FACTORY RESET", Vector2(520, 300), _start_factory)
+    hud_labels["lang_btn"] = _make_button(menu_layer, "LANGUE", Vector2(520, 380), _cycle_language)
+    hud_labels["credits_btn"] = _make_button(menu_layer, "CREDITS", Vector2(520, 460), _toggle_credits)
+    _make_button(menu_layer, "QUIT", Vector2(520, 540), func(): get_tree().quit())
     hud_labels["credits_text"] = _make_label(menu_layer, "", Vector2(420, 600), 16)
     hud_labels["credits_text"].visible = false
     pause_layer = _make_overlay(ui)
@@ -666,6 +667,9 @@ func _show_menu() -> void:
         e.set_process(false)
     if hud_labels.has("interact"):
         hud_labels["interact"].text = ""
+
+func _start_factory() -> void:
+    get_tree().change_scene_to_file("res://FactoryReset.tscn")
 
 func _start_game() -> void:
     state = "playing"
